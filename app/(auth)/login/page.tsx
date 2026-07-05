@@ -24,6 +24,16 @@ export default function LoginPage() {
 
   useEffect(() => {
     trackEvent("login_page_viewed", { page: "login" });
+    
+    // Check if user is already logged in after OAuth callback
+    (async () => {
+      if (!authConfigured || !insforge) return;
+      const { data } = await insforge.auth.getCurrentUser();
+      if (data?.user) {
+        // User is logged in, redirect to dashboard
+        window.location.href = "/dashboard";
+      }
+    })();
   }, []);
 
   const redirectTo = typeof window !== "undefined" ? `${window.location.origin}/dashboard` : "/dashboard";
@@ -44,7 +54,6 @@ export default function LoginPage() {
       const result = await insforge.auth.signInWithOAuth(provider, {
         redirectTo,
         additionalParams: { prompt: "select_account" },
-        skipBrowserRedirect: true,
       });
 
       if (result.error) {
@@ -56,15 +65,9 @@ export default function LoginPage() {
         return;
       }
 
-      if (result.data?.url) {
-        trackEvent("oauth_login_redirected", { provider, page: "login" });
-        window.location.href = result.data.url;
-        return;
-      }
-
-      setErrorMessage("Received no OAuth redirect URL. Please try again.");
-      trackEvent("oauth_login_failed", { provider, reason: "no_redirect_url", page: "login" });
-      setLoadingProvider(null);
+      // If we get here, InsForge is handling the redirect automatically
+      // The user will be taken to the OAuth provider and then back to redirectTo
+      trackEvent("oauth_login_redirected", { provider, page: "login" });
     } catch (error) {
       console.error("[LoginPage] OAuth signInWithOAuth thrown error:", error);
       setErrorMessage("Unable to start OAuth flow. Please try again.");

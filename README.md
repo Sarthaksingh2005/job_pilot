@@ -1,36 +1,87 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# JobPilot — Agentic AI Job Matching & Company Research Platform
 
-## Getting Started
+**JobPilot** is a premium, state-of-the-art agentic AI web application built to streamline job hunting, matching, and preparation. It automates finding real IT opportunities, evaluates matching percentages against user resumes, and deploys browser agents to search company pages and create dossiers.
 
-First, run the development server:
+### 🌐 Live Deployment URL: [https://fc437ic5.insforge.site](https://fc437ic5.insforge.site)
 
+---
+
+## ✨ Features
+
+1. **Dashboard Analytics Hub:**
+   - **Stats Bar:** Displays Total Jobs, Avg. Match Rate, Researched Companies, and Weekly Job Finds.
+   - **Live Activity Feed:** Log of job searches and company research timestamps.
+   - **SVG Visualization Charts:** Dynamic custom SVG area-under-line and vertical bar charts highlighting jobs found over time, company research volume, and match score distribution.
+
+2. **Smart Profiles & Resume Extraction:**
+   - User profile form capturing skills, titles, experience, and history.
+   - **AI Resume Extractor:** Instantly extracts full profile fields from uploaded resume PDFs via OpenAI GPT-4o.
+
+3. **Job Search & Gemini Batch Scorer:**
+   - Integrated with **Adzuna API** for real-time location-based job queries (US, Delhi, Lucknow, etc.).
+   - Uses **Google Gemini** to evaluate jobs against your profile and return precise matching metrics, missing skills, and detailed match reasoning.
+   - Advanced filters, sorting, and pagination.
+
+4. **Autonomous Company Research Agent:**
+   - A browser agent using **Stagehand** and **Browserbase** powered by Google Gemini to browse company homepages and sub-pages (About, Careers, Blogs).
+   - Generates a **9-field Company Dossier** including: Company Overview, Tech Stack, Culture/Values, Why This Role, Your Edge, Gaps to Address, Smart Questions, and Interview Prep.
+
+---
+
+## 🛠️ Technology Stack
+
+- **Framework:** Next.js 16.2 (App Router & Server Actions)
+- **Styling:** Tailwind CSS & custom variables
+- **Backend-as-a-Service (BaaS):** InsForge Platform (Postgres DB, RLS Policies, Session Auth, Storage Buckets)
+- **AI Services:** Google Gemini (Job matching, Browser agent, Synthesis fallback) & OpenAI GPT-4o (Resume PDF parser)
+- **Automation:** Stagehand & Browserbase Cloud Sessions
+- **Analytics:** PostHog Product Tracking
+
+---
+
+## 🚀 Local Development Setup
+
+### 1. Prerequisites
+Ensure you have [Node.js](https://nodejs.org) (v20+) installed.
+
+### 2. Install Dependencies
+Clone the repository and install packages:
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone https://github.com/Sarthaksingh2005/job_pilot.git
+cd job_pilot
+npm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 3. Configure Environment Variables
+Create a `.env.local` file at the project root with the following keys:
+```env
+NEXT_PUBLIC_INSFORGE_URL=https://fc437ic5.ap-southeast.insforge.app
+NEXT_PUBLIC_INSFORGE_ANON_KEY=your_insforge_anon_key
+INSFORGE_URL=https://fc437ic5.ap-southeast.insforge.app
+INSFORGE_API_KEY=your_insforge_service_key
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+NEXT_PUBLIC_POSTHOG_KEY=your_posthog_public_key
+NEXT_PUBLIC_POSTHOG_HOST=https://us.i.posthog.com
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+GOOGLE_API_KEY=your_gemini_api_key
+OPENAI_API_KEY=your_openai_api_key
 
-## Learn More
+ADZUNA_APP_ID=your_adzuna_app_id
+ADZUNA_APP_KEY=your_adzuna_app_key
 
-To learn more about Next.js, take a look at the following resources:
+BROWSERBASE_API_KEY=your_browserbase_api_key
+BROWSER_PROJECT_ID=your_browserbase_project_id
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### 4. Run Development Server
+```bash
+npm run dev
+```
+Open [http://localhost:3000](http://localhost:3000) to view the application locally.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### 5. Build for Production
+To test production bundles:
+```bash
+npm run build
+npm start
+```

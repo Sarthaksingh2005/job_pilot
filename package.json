@@ -9,8 +9,13 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@browserbasehq/sdk": "^2.15.0",
+    "@browserbasehq/stagehand": "^3.6.0",
+    "@google/generative-ai": "^0.21.0",
     "@insforge/sdk": "^1.4.3",
     "next": "16.2.10",
+    "openai": "^6.45.0",
+    "pdf-parse": "^2.4.5",
     "posthog-js": "^1.396.6",
     "react": "19.2.4",
     "react-dom": "19.2.4"
