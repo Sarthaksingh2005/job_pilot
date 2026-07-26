@@ -6,7 +6,7 @@
 
 ---
 
-## ✨ Features
+## ✨ Features.
 
 1. **Dashboard Analytics Hub:**
    - **Stats Bar:** Displays Total Jobs, Avg. Match Rate, Researched Companies, and Weekly Job Finds.
