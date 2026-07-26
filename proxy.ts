@@ -5,11 +5,11 @@ const protectedRoutes = ["/find-jobs", "/dashboard", "/profile"];
 // Routes that should never be protected (even if they match protected pattern)
 const publicRoutes = ["/login", "/", "/api"];
 
-export async function middleware(request: NextRequest) {
+export async function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
   // Don't protect public routes
-  if (publicRoutes.some((route) => pathname.startsWith(route))) {
+  if (publicRoutes.some((route) => route === "/" ? pathname === "/" : pathname.startsWith(route))) {
     return NextResponse.next();
   }
 
